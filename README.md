@@ -1,5 +1,3 @@
-源码仓库： [![AADisplay](https://img.shields.io/badge/AADisplay-Project-blue?logo=github)](https://github.com/Dszsu/Transparent_screenshot)
-
 # Transparent Screenshot
 
 一个基于 Xposed / LSPosed 的 Android 模块，用于在截图、录屏及屏幕投射过程中，使作用域内应用的界面内容不出现在最终画面中。
