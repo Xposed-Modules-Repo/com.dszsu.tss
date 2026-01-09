@@ -1,4 +1,4 @@
-源码仓库： [![Transparent Screenshot](https://img.shields.io/badge/Transparent Screenshot-Project-blue?logo=github)](https://github.com/Dszsu/Transparent_screenshot)
+
 
 # Transparent Screenshot
 
