@@ -27,15 +27,15 @@
 | **启用默认窗口隐藏方案** | 通过 `setSkipScreenshot` 标志阻止系统截图和录屏。 |
 | **强制允许截屏** | 移除应用自身的 `FLAG_SECURE` 与 `skipScreenshot` 保护，使其窗口始终可被截取（与隐藏功能方向相反，用于解除应用自带的截屏限制）。 |
 | **去除阴影遮罩** | 移除窗口的阴影效果。 |
-| **窗口不接收触摸与焦点** | 设置 `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL`，窗口无法接收任何触摸和焦点事件 (⚠️ 注意：会导致窗口无法点击)。 |
-| **绕过焦点检查** | 仅设置 `FLAG_NOT_FOCUSABLE`，保留触摸能力 (⚠️ 注意：会导致输入法不弹出)。 |
+| **窗口不接收触摸与焦点** | 设置 `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL`，窗口无法接收任何触摸和焦点事件。**(⚠️ 注意：窗口将无法点击。)** |
+| **绕过焦点检查** | 仅设置 `FLAG_NOT_FOCUSABLE`，保留触摸能力，但输入法（键盘）不会弹出。**(⚠️ 注意：键盘输入将无法弹出。)** |
 | **隐藏最近任务界面** | 从最近任务列表中移除应用卡片。 |
 | **修改窗口标题为** | 将窗口标题伪装为系统录屏组件，支持全局品牌选择或自定义标题。 |
 | **允许截屏至壁纸层** | 窗口完全透明时显示壁纸而非黑色（仅部分应用生效）。 |
 
 ### 🔧 系统层隐藏
 
-**系统层隐藏** 通过注入系统框架，在系统服务层级直接拦截窗口的渲染，可同时隐藏窗口及其所属 Task 的阴影/边框。此功能需要在设置中手动开启，并在主界面点击 **系统框架** 进行配置。
+系统层隐藏通过注入系统框架，在系统服务层级直接拦截窗口的渲染，可同时隐藏窗口及其所属 Task 的阴影/边框。此功能需要在设置中手动开启，并在主界面点击 **系统框架** 进行配置。
 
 > ⚠️ 开启后可能略有卡顿，请按需使用。
 
@@ -53,13 +53,13 @@
 1. 确保设备已 **Root** 并安装了 **LSPosed** 框架。
 2. 安装本模块。
 3. 打开 LSPosed 管理器，启用本模块。
-4. 进入模块界面，**勾选需要生效的目标应用**（作用域），也可以直接在模块内通过添加按钮动态申请作用域。
-5. 在模块界面中点击目标应用，进入配置页，开启所需功能。
+4. 在模块界面中 **勾选需要生效的目标应用**（作用域），也可以直接在模块内通过添加按钮动态申请作用域。
+5. 点击目标应用进入配置页，开启所需功能。
 6. 配置更改后通过热重载 **立即生效**，无需强制停止或重启目标应用。
 
 ### 🌐 全局标题设置
 
-在模块主界面右上角菜单 → **设置**，可以选择默认的窗口标题品牌。应用配置中选择 **"全局"** 模式时，将自动跟随此设置。
+在模块主界面右上角菜单 → **设置**，可以选择默认的窗口标题品牌。应用配置中选择 **“全局”** 模式时，将自动跟随此设置。
 
 ### 🔌 系统层隐藏设置
 
@@ -162,17 +162,17 @@
 | **Enable default window hiding** | Prevents system screenshots and recordings via the `setSkipScreenshot` flag. |
 | **Force allow screenshots** | Removes the app's own `FLAG_SECURE` and `skipScreenshot` protection so its windows are always capturable (the opposite of hiding; useful for lifting an app's built-in screenshot restrictions). |
 | **Remove shadow mask** | Removes window shadow effects. |
-| **Block touch and focus** | Sets `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL`; window becomes unclickable (⚠️ Note: window will become unclickable). |
-| **Bypass focus check** | Sets only `FLAG_NOT_FOCUSABLE`, touch events remain intact (⚠️ Note: keyboard input will not pop up). |
-| **Hide recent tasks** | Removes app card from recent tasks list. |
-| **Modify window title to** | Disguises window title as system recorder component; supports global brand selection or custom title. |
-| **Allow screenshot to wallpaper layer** | Shows wallpaper instead of black when window is fully transparent (some apps only). |
+| **Block touch and focus** | Sets `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL` – window becomes unclickable. **(⚠️ Note: the window will not respond to any touch or focus events.)** |
+| **Bypass focus check** | Sets only `FLAG_NOT_FOCUSABLE` – touch events remain intact, but the input method (keyboard) will not pop up. **(⚠️ Note: keyboard input will not appear.)** |
+| **Hide recent tasks** | Removes the app card from the recent tasks list. |
+| **Modify window title to** | Disguises the window title as a system recorder component; supports global brand selection or custom title. |
+| **Allow screenshot to wallpaper layer** | Shows wallpaper instead of black when the window is fully transparent (works with some apps only). |
 
 ### 🔧 System-Level Hiding
 
-**System-level hiding** works by injecting into the system framework to intercept window rendering at the system service level. It can hide both the window and the shadows/borders of its parent Task. This feature must be manually enabled in settings, and configured by tapping **System Framework** on the main screen.
+System‑level hiding injects into the system framework to intercept window rendering at the system service level. It can hide both the window itself and the shadows/borders of its parent Task. This feature must be manually enabled in Settings, and configured by tapping **System Framework** on the main screen.
 
-> ⚠️ May cause slight lag; use only when needed.
+> ⚠️ May cause slight lag; enable only when necessary.
 
 ### 🧩 Module Management (new in 2.1.2)
 
@@ -185,51 +185,51 @@
 
 ## 📖 Usage
 
-1. Make sure your device is **rooted** and has **LSPosed** framework installed.
+1. Ensure your device is **rooted** and has **LSPosed** framework installed.
 2. Install this module.
 3. Open LSPosed manager, enable the module.
-4. Enter the module interface, **select the target apps** (scope); you can also request scope dynamically from within the module via the add button.
-5. Click a target app to enter its configuration page, enable desired features.
+4. Select the **target apps** (scope) that you want the module to affect; you can also request scope dynamically from within the module via the add button.
+5. Tap a target app to open its configuration page, and enable the desired features.
 6. Configuration changes take effect **immediately** via hot reload; no need to force stop or restart the target app.
 
 ### 🌐 Global Title Setting
 
-Menu in the top right corner → **Settings**. You can choose the default window title brand. When an app configures its title mode as **"Global"**, it will automatically follow this setting.
+In the top‑right menu of the main screen → **Settings**, you can choose a default window title brand. When an app’s title mode is set to **"Global"**, it will automatically follow this setting.
 
 ### 🔌 System-Level Hiding Setup
 
-1. Enter **Settings** → turn on **System-level hiding**.
-2. The system will request adding `system` to the module scope.
-3. Return to main screen, tap the **System Framework** entry.
-4. In the system hide screen, select the apps you want to hide (search supported).
-5. Apps with hiding enabled are automatically sorted to the top.
-6. The top-right menu can toggle showing/hiding system apps.
+1. Go to **Settings** → turn on **System‑level hiding**.
+2. The system will request to add `system` to the module scope.
+3. Return to the main screen and tap the **System Framework** entry.
+4. In the system‑hide screen, select the apps you wish to hide (search supported).
+5. Enabled apps are automatically sorted to the top of the list.
+6. Use the top‑right menu to toggle showing/hiding system apps.
 
 ---
 
 ## 🔬 Technical Notes
 
-### How SkipScreenshot Works
+### How `SkipScreenshot` Works
 
-`SkipScreenshot` is a flag in the system window and rendering pipeline that marks a window or surface to be **skipped** during screenshot, screen recording, or casting operations.
+`SkipScreenshot` is a flag in the system window and rendering pipeline that marks a window or surface to be **skipped** during screenshot, recording, or casting operations.
 
 **When this flag is active:**
-- The app UI remains visible and interactive on the device.
-- The system screenshot, recording, or casting result **will not include** that window's content.
+- The app UI remains visible and interactive on the local device.
+- The window content **will not be included** in system screenshots, recordings, or casts.
 
 ### SystemUI Enhancement – Oplus Floating Menu Hiding
 
-After enabling **SystemUI menu hiding (Oplus)** in **Settings**, the module hooks into the `FlexibleMenuManager` in the SystemUI process. When the floating window menu appears on OPPO/OnePlus devices, it automatically applies `setSkipScreenshot` to the menu's Surface, hiding it from screenshots/recordings.
+When **SystemUI menu hiding (Oplus)** is enabled in **Settings**, the module hooks into `FlexibleMenuManager` in the SystemUI process. On OPPO/OnePlus devices, when the floating window menu appears, it automatically applies `setSkipScreenshot` to the menu’s Surface, hiding it from screenshots/recordings.
 
-This feature is only available on OPPO/OnePlus ColorOS 15/16 devices.
+This feature is only available on OPPO/OnePlus devices running ColorOS 15/16.
 
 ### How Window Title Modification Works
 
-When the window title matches certain well‑known system recorder components, the system will skip compositing that window during screen capture, effectively hiding it.
+When the window title matches certain well‑known system recorder component strings, the system skips compositing that window during screen capture, effectively hiding it.
 
-### How System-Level Hiding Works
+### How System‑Level Hiding Works
 
-System-level hiding directly operates on the window management mechanism of the system service (`system_server`). It sets the `setSkipScreenshot` flag for the target window's Surface at creation time, and applies the same flag to the window's parent Task container, thereby hiding both the window content and its shadow/border.
+System‑level hiding operates directly on the window management mechanism of the system service (`system_server`). It sets the `setSkipScreenshot` flag on the target window’s Surface at creation time, and also applies the same flag to the window’s parent Task container, thereby hiding both the window content and its shadow/border.
 
 ---
 
