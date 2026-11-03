@@ -13,7 +13,7 @@
 *基于 LSPosed 框架的 Xposed 模块，为应用提供全面的截图、录屏及屏幕投射防护。*
 
 [![Android](https://img.shields.io/badge/Android-10%2B-brightgreen)]()
-[![API](https://img.shields.io/badge/Xposed%20API-101-blue)]()
+[![API](https://img.shields.io/badge/Xposed%20API-102-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow)]()
 
 ---
@@ -25,6 +25,7 @@
 | 功能 | 说明 |
 |------|------|
 | **启用默认窗口隐藏方案** | 通过 `setSkipScreenshot` 标志阻止系统截图和录屏。 |
+| **强制允许截屏** | 移除应用自身的 `FLAG_SECURE` 与 `skipScreenshot` 保护，使其窗口始终可被截取（与隐藏功能方向相反，用于解除应用自带的截屏限制）。 |
 | **去除阴影遮罩** | 移除窗口的阴影效果。 |
 | **窗口不接收触摸与焦点** | 设置 `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL`，窗口无法接收任何触摸和焦点事件 (⚠️ 注意：会导致窗口无法点击)。 |
 | **绕过焦点检查** | 仅设置 `FLAG_NOT_FOCUSABLE`，保留触摸能力 (⚠️ 注意：会导致输入法不弹出)。 |
@@ -38,6 +39,13 @@
 
 > ⚠️ 开启后可能略有卡顿，请按需使用。
 
+### 🧩 模块管理（2.1.2 新增）
+
+- **动态作用域**：可直接在模块内添加 / 移除作用域，动态向框架申请，无需再打开 LSPosed 管理器逐个勾选。
+- **启用 Hook 开关**：每个应用的配置页都有总开关，关闭后该应用立即停止 Hook，无需移除作用域即可临时停用。
+- **热重载**：基于 libxposed 102，全面适配热重载，在模块里更改功能配置后立即生效，无需重启目标应用。
+- **全新界面**：界面风格升级为 Material 3，并适配动态取色。
+
 ---
 
 ## 📖 使用方法
@@ -45,9 +53,9 @@
 1. 确保设备已 **Root** 并安装了 **LSPosed** 框架。
 2. 安装本模块。
 3. 打开 LSPosed 管理器，启用本模块。
-4. 进入模块界面，**勾选需要生效的目标应用**（作用域）。
+4. 进入模块界面，**勾选需要生效的目标应用**（作用域），也可以直接在模块内通过添加按钮动态申请作用域。
 5. 在模块界面中点击目标应用，进入配置页，开启所需功能。
-6. **强制停止目标应用**后重新启动，配置即可生效。
+6. 配置更改后通过热重载 **立即生效**，无需强制停止或重启目标应用。
 
 ### 🌐 全局标题设置
 
@@ -140,7 +148,7 @@
 *A LSPosed module that provides comprehensive screenshot, screen recording and screen casting protection for apps.*
 
 [![Android](https://img.shields.io/badge/Android-10%2B-brightgreen)]()
-[![API](https://img.shields.io/badge/Xposed%20API-101-blue)]()
+[![API](https://img.shields.io/badge/Xposed%20API-102-blue)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow)]()
 
 ---
@@ -152,6 +160,7 @@
 | Feature | Description |
 |---------|-------------|
 | **Enable default window hiding** | Prevents system screenshots and recordings via the `setSkipScreenshot` flag. |
+| **Force allow screenshots** | Removes the app's own `FLAG_SECURE` and `skipScreenshot` protection so its windows are always capturable (the opposite of hiding; useful for lifting an app's built-in screenshot restrictions). |
 | **Remove shadow mask** | Removes window shadow effects. |
 | **Block touch and focus** | Sets `FLAG_NOT_FOCUSABLE \| FLAG_NOT_TOUCHABLE \| FLAG_NOT_TOUCH_MODAL`; window becomes unclickable (⚠️ Note: window will become unclickable). |
 | **Bypass focus check** | Sets only `FLAG_NOT_FOCUSABLE`, touch events remain intact (⚠️ Note: keyboard input will not pop up). |
@@ -165,6 +174,13 @@
 
 > ⚠️ May cause slight lag; use only when needed.
 
+### 🧩 Module Management (new in 2.1.2)
+
+- **Dynamic scope**: Add or remove scope entries right inside the module; scope is requested from the framework dynamically, no need to tick apps in the LSPosed manager one by one.
+- **Enable Hook switch**: Each app's config page has a master switch; turning it off stops hooking for that app immediately, without removing it from scope.
+- **Hot reload**: Fully adapted to libxposed 102 hot reload; feature changes take effect immediately, with no need to restart the target app.
+- **Refreshed UI**: The interface has been upgraded to Material 3 with dynamic color support.
+
 ---
 
 ## 📖 Usage
@@ -172,9 +188,9 @@
 1. Make sure your device is **rooted** and has **LSPosed** framework installed.
 2. Install this module.
 3. Open LSPosed manager, enable the module.
-4. Enter the module interface, **select the target apps** (scope).
+4. Enter the module interface, **select the target apps** (scope); you can also request scope dynamically from within the module via the add button.
 5. Click a target app to enter its configuration page, enable desired features.
-6. **Force stop** the target app, then restart it – the settings will take effect.
+6. Configuration changes take effect **immediately** via hot reload; no need to force stop or restart the target app.
 
 ### 🌐 Global Title Setting
 
